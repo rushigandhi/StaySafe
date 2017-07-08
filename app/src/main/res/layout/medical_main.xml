@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.rg185.staysafe.MainActivity"
+    tools:showIn="@layout/app_bar_main"
+    android:paddingTop="20sp">
+
+         <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="1250dp"
+            android:background="#ffffff">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Heart Attack"
+                android:id="@+id/heartAttackBtn"
+                android:textSize="25sp"
+                android:enabled="true"
+                android:onClick="switcher"
+                android:layout_below="@+id/imageView"
+                android:layout_alignLeft="@+id/strokeBtn"
+                android:layout_alignStart="@+id/strokeBtn"
+                android:background="@drawable/button"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/heart"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/heartAttackImg"
+                android:layout_below="@+id/imageView"
+                android:layout_alignRight="@+id/strokeImg"
+                android:layout_alignEnd="@+id/strokeImg"
+                android:paddingLeft="20sp"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Stroke"
+                android:background="@drawable/button"
+                android:textSize="25sp"
+                android:id="@+id/strokeBtn"
+                android:layout_marginTop="40dp"
+                android:onClick="switcher"
+                android:layout_below="@+id/heartAttackBtn"
+                android:layout_alignLeft="@+id/bleedingBtn"
+                android:layout_alignStart="@+id/bleedingBtn" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/strokeImg"
+                android:src="@drawable/stroke"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_alignTop="@+id/strokeBtn"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="20sp"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Bleeding"
+                android:textSize="25sp"
+                android:id="@+id/bleedingBtn"
+                android:background="@drawable/button"
+                android:layout_marginTop="40dp"
+                android:onClick="switcher"
+                android:layout_below="@+id/strokeBtn"
+                android:layout_alignLeft="@+id/breathingBtn"
+                android:layout_alignStart="@+id/breathingBtn" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/bleeding"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/bleedingImg"
+                android:layout_alignBottom="@+id/bleedingBtn"
+                android:layout_alignRight="@+id/breathingImg"
+                android:layout_alignEnd="@+id/breathingImg"
+                android:paddingLeft="20sp"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Breathing Problems"
+                android:textSize="25sp"
+                android:background="@drawable/button"
+                android:id="@+id/breathingBtn"
+                android:layout_marginTop="40dp"
+                android:onClick="switcher"
+                android:layout_below="@+id/bleedingBtn"
+                android:layout_alignLeft="@+id/heatstrokeBtn"
+                android:layout_alignStart="@+id/heatstrokeBtn" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/breathing"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/breathingImg"
+                android:layout_above="@+id/heatstrokeBtn"
+                android:layout_alignLeft="@+id/heartAttackImg"
+                android:layout_alignStart="@+id/heartAttackImg"
+                android:paddingLeft="20sp"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Heatstroke"
+                android:textSize="25sp"
+                android:background="@drawable/button"
+                android:id="@+id/heatstrokeBtn"
+                android:layout_marginTop="40dp"
+                android:onClick="switcher"
+                android:layout_below="@+id/breathingBtn"
+                android:layout_alignLeft="@+id/brokenBoneBtn"
+                android:layout_alignStart="@+id/brokenBoneBtn"                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/h"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/heatStrokeImg"
+                android:paddingLeft="20sp"
+                android:layout_alignTop="@+id/heatstrokeBtn"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Broken Bone"
+                android:textSize="25sp"
+                android:id="@+id/brokenBoneBtn"
+                android:background="@drawable/button"
+                android:layout_marginTop="40dp"
+                android:onClick="switcher"
+                android:layout_below="@+id/heatstrokeBtn"
+                android:layout_alignLeft="@+id/poisoningBtn"
+                android:layout_alignStart="@+id/poisoningBtn" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/b"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/brokenBoneImg"
+                android:layout_marginTop="40dp"
+                android:paddingLeft="20sp"
+                android:layout_above="@+id/poisoningImg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=""
+                android:id="@+id/textview3"
+                android:textSize="25sp"
+                android:layout_below="@+id/poisoningImg"
+                android:layout_alignLeft="@+id/poisoningImg"
+                android:layout_alignStart="@+id/poisoningImg"
+                android:layout_marginTop="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/p"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/poisoningImg"
+                android:paddingLeft="20sp"
+                android:layout_below="@+id/brokenBoneBtn"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="40dp" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Poisoning"
+                android:textSize="25sp"
+                android:background="@drawable/button"
+                android:id="@+id/poisoningBtn"
+                android:onClick="switcher"
+                android:layout_marginRight="27dp"
+                android:layout_marginEnd="27dp"
+                android:layout_above="@+id/textview3"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+         </RelativeLayout>
+
+    </ScrollView>
+
