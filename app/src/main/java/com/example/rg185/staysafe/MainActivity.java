@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,7 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 
     TextView locationText;
@@ -50,7 +52,14 @@ public class MainActivity extends AppCompatActivity
     private String myAddress;
     Geocoder geocoder;
     List<android.location.Address> addresses;
-    Button poisonBtn;
+
+    Button heartAttackBtn;
+    Button strokeBtn;
+    Button bleedingBtn;
+    Button breathingBtn;
+    Button heatStrokeBtn;
+    Button brokenBoneBtn;
+    Button poisoningBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +78,27 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         locationText = (TextView) findViewById(R.id.textview3);
-        poisonBtn = (Button) findViewById(R.id.poisoningBtn);
+
+        heartAttackBtn = (Button) findViewById(R.id.heartAttackBtn);
+        heartAttackBtn.setOnClickListener(this);
+
+        strokeBtn = (Button) findViewById(R.id.strokeBtn);
+        strokeBtn.setOnClickListener(this);
+
+        bleedingBtn = (Button) findViewById(R.id.bleedingBtn);
+        bleedingBtn.setOnClickListener(this);
+
+        breathingBtn = (Button) findViewById(R.id.breathingBtn);
+        breathingBtn.setOnClickListener(this);
+
+        heatStrokeBtn = (Button) findViewById(R.id.heatstrokeBtn);
+        heatStrokeBtn.setOnClickListener(this);
+
+        brokenBoneBtn = (Button) findViewById(R.id.brokenBoneBtn);
+        brokenBoneBtn.setOnClickListener(this);
+
+        poisoningBtn = (Button) findViewById(R.id.poisoningBtn);
+        poisoningBtn.setOnClickListener(this);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -213,5 +242,59 @@ public class MainActivity extends AppCompatActivity
     protected void onStop() {
         super.onStop();
         googleApiClient.disconnect();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case  R.id.heartAttackBtn: {
+                /*SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case R.id.strokeBtn: {
+                /*SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I'm having a stroke. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case  R.id.bleedingBtn: {
+                /*SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case R.id.breathingBtn: {
+               /* SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case  R.id.heatstrokeBtn: {
+               /* SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case R.id.brokenBoneBtn: {
+                /*SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case R.id.poisoningBtn: {
+                /*SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("", null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);*/
+                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@
             <item
                 android:id="@+id/contacts_nav"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Contacts" />
+                android:title="Trusted Contacts" />
 
         </menu>
     </item>
