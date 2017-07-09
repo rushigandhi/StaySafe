@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,9 +22,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -36,6 +42,7 @@ import com.google.android.gms.location.LocationServices;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +67,13 @@ public class MainActivity extends AppCompatActivity
     Button heatStrokeBtn;
     Button brokenBoneBtn;
     Button poisoningBtn;
+    ViewFlipper viewFlipper;
+
+    ArrayList<String> contactList;
+    ArrayAdapter<String> adapter;
+    EditText inputText;
+    Button addButton;
+    ListView contactLV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +129,45 @@ public class MainActivity extends AppCompatActivity
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
+        viewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
+
+        inputText = (EditText) findViewById(R.id.inputText);
+        addButton = (Button) findViewById(R.id.addButton);
+        contactLV = (ListView) findViewById(R.id.contactList);
+
+        contactList = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_multiple_choice, contactList);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+                public void onClick(View v) {
+                if (!(inputText.getText().toString().equals(""))) {
+                    contactList.add(inputText.getText().toString());
+                    inputText.setText("");
+                    adapter.notifyDataSetChanged();
+                }
+                else if (inputText.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity.this, "Please Enter a Valid Entry", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        addButton.setOnClickListener(listener);
+        contactLV.setAdapter(adapter);
+
+        contactLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                // TODO Auto-generated method stub
+                adapter.remove(adapter.getItem(pos));
+                contactList.remove(pos);
+
+
+                Log.v("long clicked","pos: " + pos);
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -157,12 +210,15 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.medical_nav) {
             // Handle the camera action
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.medical_main)));
         }
         if (id == R.id.security_nav) {
             // Handle the camera action
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.security_main)));
         }
         if (id == R.id.contacts_nav) {
             // Handle the camera action
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.contacts_main)));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

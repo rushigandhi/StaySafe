@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper android:id="@+id/myViewFlipper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="20sp">
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
+    android:id="@+id/medical_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.rg185.staysafe.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:paddingTop="20sp">
-
+    android:paddingTop="70sp"
+    android:background="#ffffff">
          <RelativeLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -194,8 +200,180 @@
                 android:layout_above="@+id/textview3"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
-
          </RelativeLayout>
-
     </ScrollView>
 
+   <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:id="@+id/security_main"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior"
+       tools:context="com.example.rg185.staysafe.MainActivity"
+       android:paddingTop="70sp"
+       android:background="#ffffff">
+      <RelativeLayout
+          android:orientation="vertical"
+          android:layout_width="wrap_content"
+          android:layout_height="1250dp"
+          android:background="#ffffff">
+
+         <Button
+             android:layout_width="200dp"
+             android:layout_height="100dp"
+             android:text="Assault"
+             android:id="@+id/assaultBtn"
+             android:textSize="25sp"
+
+             android:layout_alignTop="@+id/assaultImg"
+             android:layout_alignLeft="@+id/theftBtn"
+             android:layout_alignStart="@+id/theftBtn"
+             android:background="@drawable/button"
+             android:layout_marginBottom="10dp"
+             android:onClick="switcher"
+             android:layout_marginRight="10dp"
+             android:paddingLeft="20sp"/>
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:src="@drawable/assault"
+             android:layout_gravity="center_horizontal|bottom"
+             android:id="@+id/assaultImg"
+             android:layout_below="@+id/imageView"
+             android:layout_alignLeft="@+id/imageView4"
+             android:layout_alignStart="@+id/imageView4"
+             android:layout_marginBottom="10dp" />
+
+         <Button
+             android:layout_width="200dp"
+             android:layout_height="100dp"
+             android:text="Theft"
+             android:textSize="25dp"
+             android:id="@+id/theftBtn"
+             android:layout_below="@+id/assaultBtn"
+             android:layout_alignLeft="@+id/harassmentBtn"
+             android:layout_alignStart="@+id/harassmentBtn"
+             android:background="@drawable/button"
+             android:layout_marginBottom="10dp"
+             android:onClick="switcher"
+             android:layout_marginRight="10dp" />
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:id="@+id/theftImg"
+             android:src="@drawable/theft"
+             android:layout_gravity="center_horizontal|bottom"
+             android:layout_below="@+id/assaultBtn"
+             android:layout_alignLeft="@+id/assaultImg"
+             android:layout_alignStart="@+id/assaultImg"
+             android:layout_marginBottom="10dp" />
+
+         <Button
+             android:layout_width="200dp"
+             android:layout_height="100dp"
+             android:text="Harassment"
+             android:textSize="25dp"
+             android:id="@+id/harassmentBtn"
+             android:layout_below="@+id/theftBtn"
+             android:layout_toRightOf="@+id/sAssaultImg"
+             android:layout_toEndOf="@+id/assaultImg"
+             android:background="@drawable/button"
+             android:layout_marginBottom="10dp"
+             android:layout_marginLeft="10dp"
+             android:onClick="switcher"
+             android:layout_marginRight="10dp" />
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:src="@drawable/harrasment"
+             android:layout_gravity="center_horizontal|bottom"
+             android:id="@+id/harassmentImg"
+             android:layout_alignBottom="@+id/harassmentBtn"
+             android:layout_alignRight="@+id/theftImg"
+             android:layout_alignEnd="@+id/theftImg"
+             android:layout_marginBottom="10dp" />
+
+         <Button
+             android:layout_width="200dp"
+             android:layout_height="100dp"
+             android:text="Sexual Assault"
+             android:textSize="25dp"
+             android:id="@+id/sAssaultBtn"
+             android:background="@drawable/button"
+             android:layout_below="@+id/harassmentBtn"
+             android:layout_alignLeft="@+id/harassmentBtn"
+             android:layout_alignStart="@+id/harassmentBtn"
+             android:onClick="switcher"
+             android:layout_marginRight="10dp" />
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:src="@drawable/sexualassualt"
+             android:layout_gravity="center_horizontal|bottom"
+             android:id="@+id/sAssaultImg"
+             android:layout_above="@+id/imageView4"
+             android:layout_alignLeft="@+id/harassmentImg"
+             android:layout_alignStart="@+id/harassmentImg"
+             android:layout_marginRight="20dp" />
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:layout_marginLeft="27dp"
+             android:layout_marginStart="27dp"
+             android:layout_below="@+id/sAssaultBtn"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:layout_gravity="center_horizontal|bottom"
+             android:id="@+id/imageView4"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentEnd="true" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Latitude: , Longitude: "
+             android:id="@+id/textview1"
+             android:layout_alignTop="@+id/imageView4"
+             android:layout_alignLeft="@+id/sAssaultImg"
+             android:layout_alignStart="@+id/sAssaultImg"
+             android:layout_alignParentTop="false"
+             android:layout_marginTop="40dp"
+             android:textSize="15dp" />
+      </RelativeLayout>
+   </ScrollView>
+
+   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/contacts_main"
+       android:paddingTop="50sp"
+       android:background="#ffffff">
+      
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/inputText"
+          android:hint="(i.e. John Smith #1234567890)"/>
+      
+      <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Add Trusted Contact"
+          android:id="@+id/addButton"
+          android:layout_below="@+id/inputText"/>
+
+      <ListView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:id="@+id/contactList"
+          android:layout_below="@+id/addButton" />
+   </RelativeLayout>
+
+</ViewFlipper>
