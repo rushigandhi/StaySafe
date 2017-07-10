@@ -61,7 +61,9 @@ public class ContactListActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
                 // TODO Auto-generated method stub
+                String contact = adapter.getItem(pos).toString();
                 adapter.remove(adapter.getItem(pos));
+                Toast.makeText(ContactListActivity.this, "Contact Successfully Deleted", Toast.LENGTH_SHORT).show();
 
                 Log.v("long clicked","pos: " + pos);
                 return true;

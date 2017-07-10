@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
     private static final String TABLE_NAME = "contacts_table";
     private static final String COL1 = "ID";
-    private static final String COL2 = "name";
+    private static final String COL2 = "contact";
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -48,6 +48,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    public void deleteData(int id, String contact) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "'" +
+                " AND " + COL2 + " = '" + contact + "'";
+        Log.d(TAG, "deleteName: query: " + query);
+        Log.d(TAG, "deleteName: Deleting " + contact + " from database.");
+        sqLiteDatabase.execSQL(query);
     }
 
     public Cursor getData(){
