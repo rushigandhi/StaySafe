@@ -1,6 +1,8 @@
 package com.example.rg185.staysafe;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity
     EditText inputText;
     Button addButton;
     ListView contactLV;
+    DatabaseHelper databaseHelper;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,46 +134,8 @@ public class MainActivity extends AppCompatActivity
         geocoder = new Geocoder(this, Locale.getDefault());
 
         viewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
-
-        inputText = (EditText) findViewById(R.id.inputText);
-        addButton = (Button) findViewById(R.id.addButton);
-        contactLV = (ListView) findViewById(R.id.contactList);
-
-        contactList = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_multiple_choice, contactList);
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-                public void onClick(View v) {
-                if (!(inputText.getText().toString().equals(""))) {
-                    contactList.add(inputText.getText().toString());
-                    inputText.setText("");
-                    adapter.notifyDataSetChanged();
-                }
-                else if (inputText.getText().toString().equals("")) {
-                    Toast.makeText(MainActivity.this, "Please Enter a Valid Entry", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        addButton.setOnClickListener(listener);
-        contactLV.setAdapter(adapter);
-
-        contactLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
-                // TODO Auto-generated method stub
-                adapter.remove(adapter.getItem(pos));
-                contactList.remove(pos);
-
-
-                Log.v("long clicked","pos: " + pos);
-
-                return true;
-            }
-        });
+        databaseHelper = new DatabaseHelper(this);
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,6 +145,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -218,7 +185,8 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.contacts_nav) {
             // Handle the camera action
-            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.contacts_main)));
+            Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
