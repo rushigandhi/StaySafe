@@ -61,10 +61,22 @@ public class ContactListActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
                 // TODO Auto-generated method stub
+
                 String contact = adapter.getItem(pos).toString();
+                Cursor data = databaseHelper.getId(contact);
+                int contactID = -1;
+                while(data.moveToNext()){
+                    contactID = data.getInt(0);
+                }
+                if(contactID > -1){
+                    Log.v(TAG, "onContactClick: The ID is: " + contactID);
+                }
+                else {
+                    Toast.makeText(ContactListActivity.this, "No ID associated with that contact", Toast.LENGTH_SHORT).show();
+                }
+                databaseHelper.deleteContact(contactID, contact);
                 adapter.remove(adapter.getItem(pos));
                 Toast.makeText(ContactListActivity.this, "Contact Successfully Deleted", Toast.LENGTH_SHORT).show();
-
                 Log.v("long clicked","pos: " + pos);
                 return true;
             }

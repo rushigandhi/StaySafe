@@ -53,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteData(int id, String contact) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "'" +
-                " AND " + COL2 + " = '" + contact + "'";
+                " AND " + COL2 + " = " + contact + "'";
         Log.d(TAG, "deleteName: query: " + query);
         Log.d(TAG, "deleteName: Deleting " + contact + " from database.");
         sqLiteDatabase.execSQL(query);
@@ -64,5 +64,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = sqLiteDatabase.rawQuery(query, null);
         return data;
+    }
+
+    public Cursor getId(String contact){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "SELECT " + COL1 +  " FROM " + TABLE_NAME + " WHERE " + COL2 + " = '" + contact + "'";
+        Cursor data = sqLiteDatabase.rawQuery(query, null);
+        return data;
+    }
+
+    public void deleteContact(int id, String contact){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + id + "' AND " + COL2 + " = '" + contact + "'";
+        Log.d(TAG, "deleteContact: query: " + query);
+        Log.d(TAG, "deleteContact: Deleting " + contact + " from database.");
+        sqLiteDatabase.execSQL(query);
     }
 }
