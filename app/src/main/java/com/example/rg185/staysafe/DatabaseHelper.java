@@ -80,4 +80,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteContact: Deleting " + contact + " from database.");
         sqLiteDatabase.execSQL(query);
     }
+
 }

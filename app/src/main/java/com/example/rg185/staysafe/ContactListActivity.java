@@ -106,4 +106,23 @@ public class ContactListActivity extends AppCompatActivity {
         contactLV.setAdapter(adapter);
 
     }
+
+    public String phoneNumbers(){
+
+        String allNumbers = "";
+
+        for (int x = 0; x < contactList.size(); x++ ){
+
+            String number = contactList.get(x).toString();
+            number = number.substring(number.indexOf("#"));
+
+            if (x < contactList.size() - 1){
+                allNumbers = allNumbers + number;
+            }
+            else {
+                allNumbers = allNumbers + number + ",";
+            }
+        }
+        return allNumbers;
+    }
 }
