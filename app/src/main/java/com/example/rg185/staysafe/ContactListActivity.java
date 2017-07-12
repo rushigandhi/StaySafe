@@ -3,6 +3,8 @@ package com.example.rg185.staysafe;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +30,10 @@ public class ContactListActivity extends AppCompatActivity {
     Button addButton;
     ListView contactLV;
     DatabaseHelper databaseHelper;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ContactListActivity";
+    int listSize = 0;
+    String allNumbers = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class ContactListActivity extends AppCompatActivity {
                 if (!(inputText.getText().toString().equals(""))) {
                     contactList.add(inputText.getText().toString());
                     addData(inputText.getText().toString());
+                    listSize++;
                     inputText.setText("");
                     adapter.notifyDataSetChanged();
                 }
@@ -76,6 +83,8 @@ public class ContactListActivity extends AppCompatActivity {
                 }
                 databaseHelper.deleteContact(contactID, contact);
                 adapter.remove(adapter.getItem(pos));
+                listSize--;
+                Log.v(TAG, "The list size is " + contactList.size());
                 Toast.makeText(ContactListActivity.this, "Contact Successfully Deleted", Toast.LENGTH_SHORT).show();
                 Log.v("long clicked","pos: " + pos);
                 return true;
@@ -107,22 +116,56 @@ public class ContactListActivity extends AppCompatActivity {
 
     }
 
-    public String phoneNumbers(){
+    public void phoneNumbers(String issue, String myAddress){
 
-        String allNumbers = "";
+        databaseHelper.getAllContacts();
 
-        for (int x = 0; x < contactList.size(); x++ ){
+        /*ArrayList<String> tempList = contactList;
+        Log.v(TAG, tempList.size() + "");
+        int len = tempList.size();
 
-            String number = contactList.get(x).toString();
-            number = number.substring(number.indexOf("#"));
+        for (int x = 0; x < tempList.size(); x++ ){
 
-            if (x < contactList.size() - 1){
-                allNumbers = allNumbers + number;
+            String number = tempList.get(x).toString();
+            number = number.substring(number.indexOf("#") + 1);
+
+            if(issue.equals("heartattack")) {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);
             }
-            else {
-                allNumbers = allNumbers + number + ",";
+
+            else if (issue.equals("stroke")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a stroke. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("bleeding")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("breathing")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("heatstroke")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("brokenbone")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("poisoning")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);
             }
         }
-        return allNumbers;
+        Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+*/
     }
+
 }

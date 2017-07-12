@@ -121,11 +121,9 @@ public class MainActivity extends AppCompatActivity
                 .build();
 
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(0);
-        locationRequest.setFastestInterval(0);
-        locationRequest.setMaxWaitTime(0);
-        locationRequest.setSmallestDisplacement(0);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(60 * 1000);
+        locationRequest.setFastestInterval(15 * 1000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -133,6 +131,7 @@ public class MainActivity extends AppCompatActivity
         databaseHelper = new DatabaseHelper(this);
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,7 +173,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.medical_nav) {
             // Handle the camera action
-            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.medical_main)));
+            //viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.medical_main)));
+
         }
         if (id == R.id.security_nav) {
             // Handle the camera action
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        if(googleApiClient.isConnected()){
+        if (googleApiClient.isConnected()) {
             requestLocationUpdates();
         }
     }
@@ -269,79 +269,38 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case  R.id.heartAttackBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                 for(int i = 0; i < allNumbers.length; i++) {
-                     SmsManager smsManager = SmsManager.getDefault();
-                     smsManager.sendTextMessage(allNumbers[i], null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);
-                 }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+            case R.id.heartAttackBtn: {
+                getContacts.phoneNumbers("heartAttack", myAddress);
                 break;
             }
 
             case R.id.strokeBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I'm having a stroke. I am currently at "  + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                getContacts.phoneNumbers("stroke", myAddress);
                 break;
             }
 
-            case  R.id.bleedingBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+            case R.id.bleedingBtn: {
+                getContacts.phoneNumbers("bleeding", myAddress);
                 break;
             }
 
             case R.id.breathingBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                getContacts.phoneNumbers("breathing", myAddress);
                 break;
             }
-            case  R.id.heatstrokeBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+
+            case R.id.heatstrokeBtn: {
+                getContacts.phoneNumbers("heatstroke", myAddress);
                 break;
             }
 
             case R.id.brokenBoneBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                getContacts.phoneNumbers("brokenbone", myAddress);
                 break;
             }
 
             case R.id.poisoningBtn: {
-                String numbers = getContacts.phoneNumbers();
-                String[] allNumbers = numbers.split(",");
-                for(int i = 0; i < allNumbers.length; i++) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(allNumbers[i], null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);
-                }
-                Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
+                getContacts.phoneNumbers("poisoning", myAddress);
                 break;
             }
         }

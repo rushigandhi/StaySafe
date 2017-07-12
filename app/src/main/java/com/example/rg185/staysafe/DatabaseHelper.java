@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by rg185 on 2017-07-09.
  */
@@ -18,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "contacts_table";
     private static final String COL1 = "ID";
     private static final String COL2 = "contact";
+    Cursor cursor;
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -50,15 +53,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public void deleteData(int id, String contact) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "'" +
-                " AND " + COL2 + " = " + contact + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + contact + " from database.");
-        sqLiteDatabase.execSQL(query);
-    }
-
     public Cursor getData(){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -79,6 +73,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteContact: query: " + query);
         Log.d(TAG, "deleteContact: Deleting " + contact + " from database.");
         sqLiteDatabase.execSQL(query);
+    }
+
+    public void getAllContacts(){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "SELECT GROUP_CONCAT(" + COL2 + ", ',') FROM " + TABLE_NAME;
+        Cursor data = sqLiteDatabase.rawQuery(query, null);
+        ArrayList<String> arrList = new ArrayList<>();
+        Log.v(TAG, data.toString());
+    /*    for(int i = 0; i < data.getCount(); i++){
+            String number = data.getString(i);
+            number = number.substring(number.indexOf('#')+1);
+            arrList.add(number);
+        }*/
+
     }
 
 }
