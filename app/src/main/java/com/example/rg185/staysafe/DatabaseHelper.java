@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by rg185 on 2017-07-09.
  */
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
     private static final String TABLE_NAME = "contacts_table";
@@ -75,18 +75,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(query);
     }
 
-    public void getAllContacts(){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        String query = "SELECT GROUP_CONCAT(" + COL2 + ", ',') FROM " + TABLE_NAME;
-        Cursor data = sqLiteDatabase.rawQuery(query, null);
-        ArrayList<String> arrList = new ArrayList<>();
-        Log.v(TAG, data.toString());
-    /*    for(int i = 0; i < data.getCount(); i++){
-            String number = data.getString(i);
-            number = number.substring(number.indexOf('#')+1);
-            arrList.add(number);
-        }*/
 
-    }
 
 }

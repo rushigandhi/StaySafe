@@ -113,59 +113,5 @@ public class ContactListActivity extends AppCompatActivity {
         }
         adapter = new ArrayAdapter<String>(ContactListActivity.this, android.R.layout.simple_list_item_1, contactList);
         contactLV.setAdapter(adapter);
-
     }
-
-    public void phoneNumbers(String issue, String myAddress){
-
-        databaseHelper.getAllContacts();
-
-        /*ArrayList<String> tempList = contactList;
-        Log.v(TAG, tempList.size() + "");
-        int len = tempList.size();
-
-        for (int x = 0; x < tempList.size(); x++ ){
-
-            String number = tempList.get(x).toString();
-            number = number.substring(number.indexOf("#") + 1);
-
-            if(issue.equals("heartattack")) {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("stroke")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a stroke. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("bleeding")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("breathing")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("heatstroke")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("brokenbone")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);
-            }
-
-            else if (issue.equals("poisoning")){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);
-            }
-        }
-        Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
-*/
-    }
-
 }

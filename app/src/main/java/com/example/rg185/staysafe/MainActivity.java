@@ -270,39 +270,92 @@ public class MainActivity extends AppCompatActivity
 
         switch (view.getId()) {
             case R.id.heartAttackBtn: {
-                getContacts.phoneNumbers("heartAttack", myAddress);
+                phoneNumbers("heartattack", myAddress);
                 break;
             }
 
             case R.id.strokeBtn: {
-                getContacts.phoneNumbers("stroke", myAddress);
+                phoneNumbers("stroke", myAddress);
                 break;
             }
 
             case R.id.bleedingBtn: {
-                getContacts.phoneNumbers("bleeding", myAddress);
+                phoneNumbers("bleeding", myAddress);
                 break;
             }
 
             case R.id.breathingBtn: {
-                getContacts.phoneNumbers("breathing", myAddress);
+                phoneNumbers("breathing", myAddress);
                 break;
             }
 
             case R.id.heatstrokeBtn: {
-                getContacts.phoneNumbers("heatstroke", myAddress);
+                phoneNumbers("heatstroke", myAddress);
                 break;
             }
 
             case R.id.brokenBoneBtn: {
-                getContacts.phoneNumbers("brokenbone", myAddress);
+                phoneNumbers("brokenbone", myAddress);
                 break;
             }
 
             case R.id.poisoningBtn: {
-                getContacts.phoneNumbers("poisoning", myAddress);
+                phoneNumbers("poisoning", myAddress);
                 break;
             }
         }
+    }
+
+
+    public void phoneNumbers(String issue, String myAddress){
+
+        Cursor data = databaseHelper.getData();
+        ArrayList<String> savedList = new ArrayList<>();
+
+        while (data.moveToNext()){
+            savedList.add(data.getString(1));
+        }
+        for (int x = 0; x < savedList.size(); x++ ){
+
+            String number = savedList.get(x).toString();
+            number = number.substring(number.indexOf("#") + 1);
+            Log.v(TAG, number);
+
+            if(issue.equals("heartattack")) {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("stroke")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a stroke. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("bleeding")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("breathing")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("heatstroke")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("brokenbone")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("poisoning")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);
+            }
+        }
+        Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
     }
 }
