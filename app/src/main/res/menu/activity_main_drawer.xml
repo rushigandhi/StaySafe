@@ -5,11 +5,11 @@
         <item
 
             android:id="@+id/medical_nav"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/medi_icon"
             android:title="Medical" />
         <item
             android:id="@+id/security_nav"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/securi_icon"
             android:title="Security" />
     </group>
 
@@ -17,7 +17,7 @@
         <menu>
             <item
                 android:id="@+id/contacts_nav"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/contacts"
                 android:title="Trusted Contacts" />
 
         </menu>

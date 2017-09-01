@@ -1,5 +1,6 @@
 package com.example.rg185.staysafe;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class ContactListActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     EditText inputText;
     Button addButton;
+    Button backButton;
     ListView contactLV;
     DatabaseHelper databaseHelper;
     private static final String TAG = "ContactListActivity";
@@ -41,10 +43,19 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.contacts_main);
         inputText = (EditText) findViewById(R.id.inputText);
         addButton = (Button) findViewById(R.id.addButton);
+        backButton = (Button) findViewById(R.id.backButton);
         contactLV = (ListView) findViewById(R.id.contactList);
         databaseHelper = new DatabaseHelper(this);
 
         populateContactLV();
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

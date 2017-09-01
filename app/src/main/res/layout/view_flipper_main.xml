@@ -337,7 +337,8 @@
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="Latitude: , Longitude: "
+             android:textAppearance="?android:attr/textAppearanceLarge"
+             android:text=""
              android:id="@+id/textview1"
              android:layout_alignTop="@+id/imageView4"
              android:layout_alignLeft="@+id/sAssaultImg"

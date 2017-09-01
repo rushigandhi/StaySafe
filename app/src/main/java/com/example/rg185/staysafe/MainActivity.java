@@ -1,5 +1,7 @@
 package com.example.rg185.staysafe;
 
+import android.*;
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity
 
 
     TextView locationText;
+    TextView locationText2;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProviderApi = LocationServices.FusedLocationApi;
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity
     Button heatStrokeBtn;
     Button brokenBoneBtn;
     Button poisoningBtn;
+
+    Button assaultBtn;
+    Button sAssaultBtn;
+    Button harassmentBtn;
+    Button theftBtn;
+
     ViewFlipper viewFlipper;
     ContactListActivity getContacts = new ContactListActivity();
 
@@ -92,6 +101,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         locationText = (TextView) findViewById(R.id.textview3);
+        locationText2 = (TextView) findViewById(R.id.textview1);
+
 
         heartAttackBtn = (Button) findViewById(R.id.heartAttackBtn);
         heartAttackBtn.setOnClickListener(this);
@@ -114,6 +125,19 @@ public class MainActivity extends AppCompatActivity
         poisoningBtn = (Button) findViewById(R.id.poisoningBtn);
         poisoningBtn.setOnClickListener(this);
 
+        assaultBtn = (Button) findViewById(R.id.assaultBtn);
+        assaultBtn.setOnClickListener(this);
+
+        sAssaultBtn = (Button) findViewById(R.id.sAssaultBtn);
+        sAssaultBtn.setOnClickListener(this);
+
+        theftBtn = (Button) findViewById(R.id.theftBtn);
+        theftBtn.setOnClickListener(this);
+
+        harassmentBtn = (Button) findViewById(R.id.harassmentBtn);
+        harassmentBtn.setOnClickListener(this);
+
+
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -130,6 +154,22 @@ public class MainActivity extends AppCompatActivity
         viewFlipper = (ViewFlipper) findViewById(R.id.myViewFlipper);
         databaseHelper = new DatabaseHelper(this);
 
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1);
+        }
+
     }
 
     @Override
@@ -145,8 +185,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // Inflate the menu; this adds items to the action bar if it is present
         return true;
     }
 
@@ -156,11 +195,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -173,7 +207,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.medical_nav) {
             // Handle the camera action
-            //viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.medical_main)));
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.medical_main)));
 
         }
         if (id == R.id.security_nav) {
@@ -210,9 +244,15 @@ public class MainActivity extends AppCompatActivity
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        else {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        }
     }
 
     @Override
@@ -236,6 +276,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         locationText.setText(myAddress);
+        locationText2.setText(myAddress);
     }
 
     @Override
@@ -256,7 +297,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }
 
     @Override
@@ -303,6 +343,26 @@ public class MainActivity extends AppCompatActivity
                 phoneNumbers("poisoning", myAddress);
                 break;
             }
+
+            case R.id.assaultBtn: {
+                phoneNumbers("assault", myAddress);
+                break;
+            }
+
+            case R.id.sAssaultBtn: {
+                phoneNumbers("sexual assault", myAddress);
+                break;
+            }
+
+            case R.id.theftBtn: {
+                phoneNumbers("theft", myAddress);
+                break;
+            }
+
+            case R.id.harassmentBtn: {
+                phoneNumbers("harassment", myAddress);
+                break;
+            }
         }
     }
 
@@ -323,37 +383,57 @@ public class MainActivity extends AppCompatActivity
 
             if(issue.equals("heartattack")) {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a heart attack. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I'm having a heart attack. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("stroke")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a stroke. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I'm having a stroke. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("bleeding")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm bleeding. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I'm bleeding. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("breathing")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I have trouble breathing. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I have trouble breathing. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("heatstroke")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm having a heatstroke. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I'm having a heatstroke. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("brokenbone")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I have a broken bone. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I have a broken bone. I'm currently at " + myAddress + ".", null, null);
             }
 
             else if (issue.equals("poisoning")){
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "I'm poisoned. I am currently at " + myAddress + ".", null, null);
+                smsManager.sendTextMessage(number, null, "I'm poisoned. I'm currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("assault")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I got assaulted. I'm currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("sexual assault")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I got sexually assaulted. I'm currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("theft")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "There was a theft at my location. I'm currently at " + myAddress + ".", null, null);
+            }
+
+            else if (issue.equals("harassment")){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, "I got harassed. I'm currently at " + myAddress + ".", null, null);
             }
         }
         Toast.makeText(this, "Your trusted contacts have been contacted. Please wait.", Toast.LENGTH_SHORT).show();
