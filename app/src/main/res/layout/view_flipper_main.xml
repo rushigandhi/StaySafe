@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.rg185.staysafe.MainActivity"
+    tools:context="com.staysafe.staysafe.staysafe.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:paddingTop="70sp"
     android:background="#ffffff">
@@ -30,7 +30,6 @@
                 android:onClick="switcher"
                 android:textSize="25sp"
                 android:enabled="true"
-                android:layout_below="@+id/imageView"
                 android:layout_alignLeft="@+id/strokeBtn"
                 android:layout_alignStart="@+id/strokeBtn"
                 android:background="@drawable/button"/>
@@ -41,7 +40,6 @@
                 android:src="@drawable/heart"
                 android:layout_gravity="center_horizontal|bottom"
                 android:id="@+id/heartAttackImg"
-                android:layout_below="@+id/imageView"
                 android:layout_alignRight="@+id/strokeImg"
                 android:layout_alignEnd="@+id/strokeImg"
                 android:paddingLeft="20sp"/>
@@ -210,7 +208,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-       tools:context="com.example.rg185.staysafe.MainActivity"
+       tools:context="com.staysafe.staysafe.staysafe.MainActivity"
        android:paddingTop="70sp"
        android:background="#ffffff">
       <RelativeLayout
@@ -241,7 +239,6 @@
              android:src="@drawable/assault"
              android:layout_gravity="center_horizontal|bottom"
              android:id="@+id/assaultImg"
-             android:layout_below="@+id/imageView"
              android:layout_alignLeft="@+id/imageView4"
              android:layout_alignStart="@+id/imageView4"
              android:layout_marginBottom="10dp" />
